@@ -1,3 +1,25 @@
+/**
+
+ * File:        GameWindow.java
+
+ * Author:      Zhilong Gan
+
+ * ID:          100331942
+
+ * Date:        2019.03.19
+
+ * class:       CPSC 1181-03
+
+ * instructor:  Hengameh Hamavand
+
+ * title        the game window for program
+
+ * Compiler:    java JDK 10.2
+
+ */
+
+
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -537,7 +559,6 @@ public class GameWindow extends JFrame
     {
         cards = new Card[20];
         int random = 0;
-        System.out.println("create card");
 
         for(int i = 0; i < cards.length; i++)
         {
