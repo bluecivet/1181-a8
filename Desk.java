@@ -3,7 +3,7 @@ import java.awt.*;
 public class Desk extends JComponent
 {
 
-    Card[] cards;
+    Card[] cards; // the card on the desk
 
     //---------------------------------------------------
 
