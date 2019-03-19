@@ -50,7 +50,6 @@ public class Desk extends JComponent
             card.setY(cardY);
             card.setBounds(cardX, cardY, card.getWidth(),card.getHeight());
             card.repaint();
-            //g2.drawImage(card.getImg(), cardX, cardY, card.getWidth(), card.getHeight(), this);
             cardX = cardX + cellWidth;
 
         }

@@ -1,41 +1,64 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+
+/**
+ * this class is the game which have 2 player
+ * the plays need to click the card on the game window
+ * there is a loose card if the play select that play will loose
+ * the play who quit the game will also loose
+ * each term the play can only choose 1 or 2 card
+ * if the player want to end their term click the done button the term will change to the other play
+ * the play are not allow to skip their term
+ * if the play choose 2 card already the term will change automately
+ */
+
+
+/**
+ *  the window will contain 4 part
+ *  the top part: have a label which to show some warning message
+ *  the left part: have a label which to show some is the left side is going and win or not
+ *  the right part: have a label which to show some is the right side is going and win or not
+ *  the center part: have a desk which is the area that the uer select the card this will show by drawing the image out
+ */
+
 public class GameWindow extends JFrame
 {
-    Image backgroundImg;
-    Background background;
+    private Image backgroundImg;  //the image for the  window background
+    private Background background;  // extend JPanel for rewriting the paint method
     Card[] cards;
 
-    JLabel mainMessage;
-    JLabel leftMessage;
-    JLabel rightMessage;
-    JPanel userMessage;
-    JPanel leftPanel;
-    JPanel rightPanel;
-    JPanel leftCenter;
-    JPanel rightCenter;
+    private JLabel mainMessage;  // show in the top
+    private JLabel leftMessage;
+    private JLabel rightMessage;
+    private JPanel userMessage;    // panel show in the top contain a label
+    private JPanel leftPanel;     // show in left contain a label
+    private JPanel rightPanel;    // show in the right contain a label
 
-    JComponent desk;
-    JButton doneLeft;
-    JButton doneRight;
-    JButton quitLeft;
-    JButton quitRight;
+    JComponent desk;    // the component which contain the cards showing by drawing the image of the card
+    JButton doneLeft;    // left side done button(once the user pick one the done option are avalible)
+    JButton doneRight;    // right side done button(once the user pick one the done option are avalible)
+    JButton quitLeft;     // the quit game option for left side once the user click he will lose
+    JButton quitRight;    // the quit game option for right side once the user click he will lose
 
-    User user1;
-    User user2;
-    //Thread game;
+    private User user1;          //left side user
+    private User user2;          // right side user
+
 
     //inner class
     //---------------------------------------------------------------------
 
+    /**
+     * this is a inner class which extends JPanel
+     * the goal for this class is to use painComponent method to paint the background for the window
+     * once the this class is add to JFrame it will draw the background
+     */
 
     class Background extends JPanel
     {
+        @Override
         public void paintComponent(Graphics g)
         {
-            Graphics2D g2 = (Graphics2D) g;
-
             g.drawImage(backgroundImg, 0,0, getWidth(), getHeight(), null);
         }
     }
@@ -43,8 +66,10 @@ public class GameWindow extends JFrame
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
+    /**
+     * this is a inner class which extends ComponentAdapter and implements WindowStateListener
+     * the goal for tha
+     */
 
     class ResizeListener extends ComponentAdapter implements WindowStateListener
     {
@@ -96,6 +121,10 @@ public class GameWindow extends JFrame
 
         }
 
+
+        //iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+
+
         @Override
         public void mouseExited(MouseEvent e)
         {
@@ -114,6 +143,9 @@ public class GameWindow extends JFrame
             }
 
         }
+
+
+        //iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
 
 
         public void mouseClicked(MouseEvent e)
@@ -154,8 +186,10 @@ public class GameWindow extends JFrame
 
             termChange();
 
-        }
+        }  // end method mouseClick
 
+
+       //iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
 
 
         public Card getCard(MouseEvent e)
@@ -171,7 +205,7 @@ public class GameWindow extends JFrame
             }
         }
 
-    }
+    }  // end class
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,10 +234,8 @@ public class GameWindow extends JFrame
                         clearCount(user1,user2);
                         termChange();
                     }
-
                 }
-
-            }
+            } // end left button is click
 
             if(e.getSource().equals(doneRight))
             {
@@ -224,12 +256,11 @@ public class GameWindow extends JFrame
                         clearCount(user1,user2);
                         termChange();
                     }
-
                 }
 
-            }
-        }
-    }
+            }// end right button is click
+        } // end mouse click method
+    }  // end inner class
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -265,6 +296,8 @@ public class GameWindow extends JFrame
         }
 
     }
+
+      // the method that the inner class user
     //----------------------------------------------------------------------------------------------------
 
 
@@ -284,6 +317,7 @@ public class GameWindow extends JFrame
                     rightMessage.setText("go");
                 }
         }
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -336,8 +370,10 @@ public class GameWindow extends JFrame
         }
 
 
-    //---------------------------------------------------------------------
 
+
+    //---------------------------------------------------------------------
+    // constructor
 
     GameWindow()
     {
@@ -347,7 +383,8 @@ public class GameWindow extends JFrame
         setListener();
     }
 
-
+    // method for constructor use
+    // set up all the layout and style print the window out
     /////////////////////////////////////////////////////////////////////////
 
 
@@ -365,8 +402,6 @@ public class GameWindow extends JFrame
         userMessage = new JPanel();
         leftPanel = new JPanel();
         rightPanel = new JPanel();
-        leftCenter = new JPanel();
-        rightCenter = new JPanel();
         backgroundImg = new ImageIcon("bg.jpg").getImage();
         background = new Background();
         createCard();
@@ -404,7 +439,6 @@ public class GameWindow extends JFrame
 
     public void addCard(JComponent desk, Card[] cards)
     {
-
         for(Card card: cards)
         {
             desk.add(card);
@@ -415,7 +449,7 @@ public class GameWindow extends JFrame
     ////////////////////////////////////////////////////////////////////////
 
 
-    public void setStyle()
+    private void setStyle()
     {
 
         leftPanel.setPreferredSize(new Dimension(getWidth() >> 3,getHeight() >> 3));
@@ -459,7 +493,7 @@ public class GameWindow extends JFrame
     /////////////////////////////////////////////////////////////////////////
 
 
-    public void setListener()
+    private void setListener()
     {
         ResizeListener resizeListener = new ResizeListener();
         this.addComponentListener(resizeListener);
@@ -496,4 +530,4 @@ public class GameWindow extends JFrame
 
 
 
-}
+} // end GameWindow class
